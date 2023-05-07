@@ -34,7 +34,7 @@
         pkg = d2n-flake.packages.${system}.default;
 
         docker-flake = {
-          pakcages = {
+          packages = {
             "${system}" = {
               image = pkgs.dockerTools.buildImage {
                 name = "alec";
@@ -46,7 +46,11 @@
             };
           };
         };
-        flakes = dream2nix.lib.dlib.mergeFlakes [ d2n-flake docker-flake shell-flake ];
+
+        flakes = dream2nix.lib.dlib.mergeFlakes [
+          docker-flake
+          d2n-flake
+        ];
 
       in
       flakes
